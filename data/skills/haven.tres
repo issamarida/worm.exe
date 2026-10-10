@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"haven"
+title = "The home within"
+description = "Carry a trace of home. +25 moisture and twice the rest recovery."
+branch = 2
+tier = 3
+max_rank = 1
+base_cost = 13
+cost_per_rank = 0
+prerequisite = &"skin"
+effects = {&"max_moisture": 25.0, &"rest_rate": 1.0}

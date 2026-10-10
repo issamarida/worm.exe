@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"channels"
+title = "Capillary channels"
+description = "Drink deeply. Dew restores 30% more moisture per rank."
+branch = 1
+tier = 2
+max_rank = 2
+base_cost = 8
+cost_per_rank = 3
+prerequisite = &"clay"
+effects = {&"moisture_gain": 0.3}

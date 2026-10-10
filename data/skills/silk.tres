@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"silk"
+title = "Silken passages"
+description = "Move through the earth with 25% greater speed."
+branch = 1
+tier = 3
+max_rank = 1
+base_cost = 13
+cost_per_rank = 0
+prerequisite = &"channels"
+effects = {&"tunnel_speed": 0.25}
