@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"vessel"
+title = "A deeper vessel"
+description = "Make room for another journey. +20 maximum energy per rank."
+branch = 2
+tier = 1
+max_rank = 2
+base_cost = 5
+cost_per_rank = 3
+prerequisite = &"breath"
+effects = {&"max_energy": 20.0}

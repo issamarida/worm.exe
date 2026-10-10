@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"clay"
+title = "Clay song"
+description = "Your passage softens neighboring soil by 18% per rank."
+branch = 1
+tier = 1
+max_rank = 2
+base_cost = 5
+cost_per_rank = 3
+prerequisite = &"jaw"
+effects = {&"soil_softening": 0.18}

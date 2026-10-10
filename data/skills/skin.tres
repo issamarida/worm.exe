@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"skin"
+title = "Pressure skin"
+description = "Let the weight pass through you. Resist 25% pressure per rank."
+branch = 2
+tier = 2
+max_rank = 2
+base_cost = 8
+cost_per_rank = 3
+prerequisite = &"vessel"
+effects = {&"pressure_resistance": 0.25}

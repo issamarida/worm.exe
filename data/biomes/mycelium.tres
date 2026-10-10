@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/biome_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"mycelium"
+title = "THE MYCELIAL CHOIR"
+subtitle = "Something down here is singing without sound."
+minimum_depth = 80
+density = 1.05
+friction = 0.9
+dryness = 0.75
+glyphs = ",:;|"
+soil_color = Color(0.337255, 0.380392, 0.360784, 1)
+accent_color = Color(0.572549, 0.729412, 0.694118, 1)
+cave_threshold = 0.27

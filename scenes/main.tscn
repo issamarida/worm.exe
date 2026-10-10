@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/game_root.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/game/session.tscn" id="2"]
+[ext_resource type="Script" path="res://scripts/ui/terminal_hud.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/rendering/ascii_renderer.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/ui/terminal_overlay.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/audio/earth_audio.gd" id="6"]
+[ext_resource type="Shader" path="res://shaders/terminal_film.gdshader" id="7"]
+
+[sub_resource type="ShaderMaterial" id="FilmMaterial"]
+shader = ExtResource("7")
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Session" parent="." instance=ExtResource("2")]
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3")
+
+[node name="AsciiField" type="Control" parent="."]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 174.0
+offset_right = 1157.0
+offset_bottom = 700.0
+mouse_filter = 2
+script = ExtResource("4")
+
+[node name="Audio" type="Node" parent="."]
+script = ExtResource("6")
+
+[node name="Overlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5")
+
+[node name="Film" type="CanvasLayer" parent="."]
+layer = 90
+
+[node name="Effect" type="ColorRect" parent="Film"]
+material = SubResource("FilmMaterial")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
