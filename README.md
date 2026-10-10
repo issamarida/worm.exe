@@ -45,7 +45,7 @@ Find **three `&` root echoes**, then **`Ω` at 103m**, and bring its light home.
 - Interactive skill cards, explored-world atlas, guide, title and pause menus.
 - Original ambient sound; sound, film and reduced-motion settings.
 - Automatic checksummed saves with last-good recovery.
-- Linux, Windows and Web export presets, CI and 115 behavioral checks.
+- Linux, Windows and Web export presets, CI and 116 behavioral checks.
 
 ## Validate and develop
 
