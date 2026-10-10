@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/biome_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"loam"
+title = "THE SOFT LOAM"
+subtitle = "Where the roots still remember rain."
+minimum_depth = 0
+density = 0.75
+friction = 1.0
+dryness = 0.8
+glyphs = ".,:;"
+soil_color = Color(0.423529, 0.4, 0.329412, 1)
+accent_color = Color(0.721569, 0.784314, 0.596078, 1)
+cave_threshold = 0.32

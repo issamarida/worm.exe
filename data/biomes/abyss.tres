@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/biome_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"abyss"
+title = "THE VELVET DEEP"
+subtitle = "The earth keeps a little light for you."
+minimum_depth = 190
+density = 2.15
+friction = 1.4
+dryness = 1.4
+glyphs = ":+x#"
+soil_color = Color(0.396078, 0.337255, 0.419608, 1)
+accent_color = Color(0.788235, 0.654902, 0.768627, 1)
+cave_threshold = 0.32

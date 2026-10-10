@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/biome_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"shale"
+title = "THE MEMORY SHALE"
+subtitle = "Even stone has a soft place, somewhere."
+minimum_depth = 134
+density = 1.8
+friction = 1.35
+dryness = 1.3
+glyphs = "+=/#"
+soil_color = Color(0.392157, 0.4, 0.458824, 1)
+accent_color = Color(0.662745, 0.627451, 0.745098, 1)
+cave_threshold = 0.28

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/biome_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"clay"
+title = "THE HUSHED CLAY"
+subtitle = "A slow embrace. A colder kind of quiet."
+minimum_depth = 38
+density = 1.35
+friction = 1.2
+dryness = 1.15
+glyphs = ":;+="
+soil_color = Color(0.396078, 0.34902, 0.305882, 1)
+accent_color = Color(0.768627, 0.658824, 0.486275, 1)
+cave_threshold = 0.3
