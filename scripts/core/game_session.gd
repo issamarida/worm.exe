@@ -32,10 +32,7 @@ var _last_direction: Vector2i = Vector2i.ZERO
 
 
 func _ready() -> void:
-	worm.stepped.connect(_on_step)
-	worm.step_started.connect(func(position: Vector2i, soil: SoilCell, sprinting: bool) -> void:
-		survival.consume_step(soil, position.y, sprinting)
-	)
+	worm.step_started.connect(_on_step_started)
 	survival.depleted.connect(_on_depleted)
 	upgrades.stats_changed.connect(survival.set_stats)
 	upgrades.purchased.connect(_on_purchase)
@@ -275,7 +272,14 @@ static func _number(value: Variant, minimum: float, maximum: float) -> float:
 	return clampf(number, minimum, maximum) if is_finite(number) else minimum
 
 
-func _on_step(position: Vector2i, _soil: SoilCell, _sprinting: bool) -> void:
+func _on_step_started(position: Vector2i, soil: SoilCell, sprinting: bool) -> void:
+	# The grid step is one transaction; visual interpolation can safely resume later.
+	survival.consume_step(soil, position.y, sprinting)
+	if worm.cells[0] == position:
+		_resolve_step(position)
+
+
+func _resolve_step(position: Vector2i) -> void:
 	distance_dug += 1
 	deepest = maxi(deepest, position.y)
 	if worm.cells[0] != position: return

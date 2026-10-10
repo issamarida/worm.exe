@@ -19,6 +19,7 @@ func _run() -> void:
 	_test_movement()
 	_test_survival()
 	_test_upgrades()
+	_test_mid_step_save()
 	_test_save_round_trip()
 	_test_full_journey()
 	_session.queue_free()
@@ -70,6 +71,7 @@ func _test_movement() -> void:
 	_check(_session.worm.head_position().is_equal_approx(Vector2(original[0])), "Render position begins at the previous cell")
 	var charged_energy: float = _session.survival.energy
 	_check(charged_energy < _session.upgrades.stats.max_energy, "Movement cost is charged before a mid-step save can occur")
+	_check(_session.distance_dug == 1, "Progression resolves atomically with the logical grid step")
 	_session.worm.tick(0.05, Vector2i.ZERO, false, _session.world, _session.upgrades.stats)
 	_check(_session.worm.head_position().x > original[0].x and _session.worm.head_position().x < original[0].x + 1, "Head interpolates continuously between cells")
 	_session.worm.tick(1.0, Vector2i.ZERO, false, _session.world, _session.upgrades.stats)
@@ -145,6 +147,10 @@ func _test_upgrades() -> void:
 
 
 func _test_save_round_trip() -> void:
+	_session.new_journey(731204)
+	_session.upgrades.spores = 1000
+	for skill: SkillDefinition in _session.upgrades.catalog:
+		while _session.upgrades.rank_of(skill.id) < skill.max_rank: _session.upgrades.purchase(skill.id)
 	var path: String = "user://tests-round-trip.json"
 	_step(Vector2i.DOWN)
 	_session.world.reveal(_session.worm.cells[0], 20)
@@ -169,6 +175,22 @@ func _test_save_round_trip() -> void:
 	_check(not _session.restore(invalid), "Malformed body data is rejected without crashing")
 	_check(SaveStore.read_save("user://a-nonexistent-burrow.json").is_empty(), "Missing saves safely return an empty state")
 	print("PASS save integrity, round-trip and recovery")
+
+
+func _test_mid_step_save() -> void:
+	_session.new_journey(731204)
+	_walk_to(Vector2i(3, 15))
+	var before: int = _session.upgrades.spores
+	_session.worm.tick(0.0, Vector2i.DOWN, false, _session.world, _session.upgrades.stats)
+	_check(_session.worm.moving and _session.world.get_cell(Vector2i(3, 16)).item == SoilCell.Item.NONE, "Pickup resolves before its movement animation completes")
+	_check(_session.upgrades.spores == before + 2, "Mid-step pickup awards its spores immediately")
+	var energy: float = _session.survival.energy
+	_check(_session.save_game("user://tests-mid-step.json"), "A save can be taken during visual interpolation")
+	_check(_session.load_game("user://tests-mid-step.json"), "Mid-step save can be loaded")
+	_check(_session.worm.cells[0] == Vector2i(3, 16), "Mid-step load restores the committed logical destination")
+	_check(_session.upgrades.spores == before + 2, "Loading cannot lose or duplicate the pending pickup reward")
+	_check(is_equal_approx(_session.survival.energy, energy), "Loading cannot charge the committed movement twice")
+	print("PASS atomic movement and mid-step save regression")
 
 
 func _test_full_journey() -> void:

@@ -85,7 +85,7 @@ There are no global gameplay autoloads and no scene-path lookups from individual
 | --- | --- | --- |
 | WorldGenerator | `configure(balance, seed)`, `get_cell(Vector2i)`, `dig`, `collect`, `reveal`, `biome_at` | Session, worm and rendering |
 | WormController | `tick(delta, direction, sprint, world, stats)`, `reset`, `restore`, `head_position`, `interpolated_body` | Session and renderer |
-| WormController | `step_started(position, soil, sprinting)` and `stepped(position, soil, sprinting)` | Survival costs and completed-step rewards |
+| WormController | `step_started(position, soil, sprinting)` and `stepped(position, soil, sprinting)` | Atomic grid-step gameplay and completed-animation audio |
 | SurvivalSystem | `tick`, `consume_step`, `restore_pickup`, `set_stats`, `depleted(reason)` | Session |
 | UpgradeSystem | `purchase(id)`, `locked_reason`, `rank_of`, `rebuild_stats`, `validate_catalog` | Session and skill cards |
 | GameSession | `sense`, `recall`, `snapshot`, `restore`, `save_game`, `load_game`, typed state signals | Root, HUD, audio and overlays |
@@ -111,7 +111,7 @@ One cell corresponds to 0.5m on the instruments. Root echoes are at `(-14,44)`, 
 
 `WormController` uses a historical-cell shift register. Before a step, it copies the body cells. It then moves the head one cardinal cell and gives every following segment its predecessor's last cell. Self-crossings and reversing are legal. `head_position()` and `interpolated_body()` interpolate those two snapshots with a smooth cubic blend; optional subpixel oscillation gives the body a gentle life without altering the grid.
 
-The step duration is `base × (0.75 + 0.42 × sqrt(max(0.2, density / dig_efficiency))) / tunnel_speed`. Hurrying multiplies it by 0.65. Costs are charged when the step starts, so saving during interpolation cannot bypass survival costs. Pickups and objective progress resolve when the step completes.
+The step duration is `base × (0.75 + 0.42 × sqrt(max(0.2, density / dig_efficiency))) / tunnel_speed`. Hurrying multiplies it by 0.65. Costs, pickups and objective progress resolve together when the logical grid step starts. The separate render interpolation can resume at the committed destination after loading, without bypassing costs or losing or duplicating rewards. Depletion can cancel progression and rescue the worm before rewards resolve.
 
 ```text
 pressure = max(0, depth_cells × 0.003) × (1 − min(0.85, pressure_resistance))

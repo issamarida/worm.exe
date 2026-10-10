@@ -11,7 +11,7 @@ python3 tools/validate.py
 python3 tools/validate.py --godot /path/to/Godot
 ```
 
-The validator imports assets, parses all 21 runtime scripts, runs 87 simulation checks and 20 interface checks, and smoke-tests the main scene for 90 frames. It detects failures from both exit codes and logs because script errors can leave Godot's exit code at zero. Tests use temporary XDG data/config directories, leaving a player's real save alone.
+The validator imports assets, parses all 21 runtime scripts, runs 95 simulation checks and 20 interface checks, and smoke-tests the main scene for 90 frames. It detects failures from both exit codes and logs because script errors can leave Godot's exit code at zero. Tests use temporary XDG data/config directories, leaving a player's real save alone.
 
 Simulation checks cover deterministic generation, distant and negative coordinates, bounded chunks, persisted edits after eviction, soil softening, continuous body interpolation, connected tails, surface restrictions, movement charging, survival pressure, rescue, every skill rank, save integrity and backup recovery, and an actual route to the ending. UI checks cover skill cards, purchase signals, wheel zoom, settings, modal transitions, real keyboard movement, pulse input, save/continue, and new-game cancellation.
 
