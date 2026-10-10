@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/game_session.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/world/world_generator.gd" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/player/worm.tscn" id="3"]
+[ext_resource type="Script" path="res://scripts/player/survival_system.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/progression/upgrade_system.gd" id="5"]
+[ext_resource type="Resource" path="res://data/balance.tres" id="6"]
+
+[node name="Session" type="Node"]
+script = ExtResource("1")
+balance = ExtResource("6")
+
+[node name="World" type="Node" parent="."]
+script = ExtResource("2")
+
+[node name="Worm" parent="." instance=ExtResource("3")]
+
+[node name="Survival" type="Node" parent="."]
+script = ExtResource("4")
+
+[node name="Upgrades" type="Node" parent="."]
+script = ExtResource("5")
